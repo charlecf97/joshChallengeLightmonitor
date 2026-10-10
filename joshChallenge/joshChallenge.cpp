@@ -24,6 +24,10 @@ public:
 
     void checkLightDetails(const Light& l, std::map<std::string, Light>& tempHolder) {
         Light lightDetails = getLightState(l.id);
+        if (lightDetails.id.empty()) {
+            std::cerr << "Failed to get light state for ID: " << l.id << std::endl;
+            return;
+		}
         if (lights.empty() || lights.count(l.id) == 0) {
             tempHolder[l.id] = lightDetails;
             if (!firstRun) {
@@ -120,10 +124,12 @@ public:
 
         if (!res) {
             std::cerr << "Request failed or connection error.\n";
+            return;
         }
 
         if (res->status != 200) {
             std::cerr << "Failed to get lights status. HTTP status: " << res->status << std::endl;
+            return;
         }
 
         try {
@@ -136,6 +142,7 @@ public:
             // ]
             if (!j.is_array()) {
                 std::cerr << "Unexpected JSON format for lights: expected array\n";
+                return;
             }
 
             for (auto& item : j) {

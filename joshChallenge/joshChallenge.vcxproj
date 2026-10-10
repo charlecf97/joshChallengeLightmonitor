@@ -130,11 +130,11 @@
     <ClCompile Include="joshChallenge.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="logic-flow.excalidraw" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="httplib.h" />
     <ClInclude Include="json.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\logic-flow.excalidraw" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

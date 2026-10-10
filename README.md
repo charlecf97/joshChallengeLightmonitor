@@ -36,3 +36,12 @@ This project is designed as a solution to the coding challenge [here](https://gi
 - From the command line: execute the built binary found under `\x64`,`\bin`, `\build`, or `\Release`/`\Debug` folders depending on your configuration.
 
 The program communicate with localhost on port 8080. Running the simulator is recommended for testing. The simulator can be found [here](https://github.com/jstarllc/JoshCodingChallenge/releases).
+
+At the moment, the only binaries available are for Windows 11 in the release.
+
+To test the project:
+- Run the light simulator from localhost:8080.
+- Run the [monitor.exe](https://github.com/charlecf97/joshChallengeLightmonitor/releases) file from the binaries
+- From the simulator, make changes to the lights and notice the updates being published on the monitor console
+
+The monitor checks for updates every 5 seconds.

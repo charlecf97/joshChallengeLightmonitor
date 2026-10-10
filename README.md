@@ -1,8 +1,8 @@
-Here's the improved `README.md` file, incorporating the new content while maintaining the existing structure and information:
-
 # joshChallenge
 
-A C++ project targeting C++14. This README provides an overview, prerequisites, build and run instructions for Visual Studio 2022 and command-line builds, coding standards references (the repository contains `.editorconfig` and `CONTRIBUTING.md`), contribution guidance, and a license placeholder.
+A C++ project targeting C++14. This README provides an overview, prerequisites, build and run instructions for Visual Studio 2022 and command-line builds, and a license placeholder.
+
+This project is designed as a solution to the coding challenge [here](https://github.com/jstarllc/JoshCodingChallenge).
 
 ## Prerequisites
 
@@ -33,31 +33,6 @@ A C++ project targeting C++14. This README provides an overview, prerequisites, 
 ## Run
 
 - From Visual Studio: Run the project with `F5` (Debug) or `Ctrl+F5` (Run without debugging).
-- From the command line: execute the built binary found under `\bin`, `\build`, or `\Release`/`\Debug` folders depending on your configuration.
+- From the command line: execute the built binary found under `\x64`,`\bin`, `\build`, or `\Release`/`\Debug` folders depending on your configuration.
 
-## Tests
-
-If the repository contains tests, run them via the Test Explorer in Visual Studio or run the test binary produced by the build.
-
-## Coding Standards
-
-This repository uses `.editorconfig` and `CONTRIBUTING.md` to define formatting and contribution guidelines. Please follow those files for naming, formatting, and commit standards.
-
-## Contributing
-
-1. Fork the repository and create a feature branch.
-2. Follow the `.editorconfig` rules and repository guidelines from `CONTRIBUTING.md`.
-3. Create a pull request describing your changes and link any relevant issues.
-
-## License
-
-This project does not include a license file. Add a `LICENSE` file to specify licensing terms.
-
-## Contact
-
-For questions or issues, open an issue in the repository.
-
-### Changes Made:
-- Ensured consistent formatting (e.g., code blocks, bullet points).
-- Clarified sections for better readability.
-- Maintained the original structure while integrating the new content seamlessly.
+The program communicate with localhost on port 8080. Running the simulator is recommended for testing. The simulator can be found [here](https://github.com/jstarllc/JoshCodingChallenge/releases).

@@ -16,6 +16,8 @@ private:
     std::map<std::string, Light> lights;
     httplib::Client cli;
 	bool firstRun = true;
+    bool wasConnectedLastTime = true;
+    bool isConnectedNow = true;
 
 public:
     Monitor() : cli("http://localhost:8080") {
@@ -84,11 +86,18 @@ public:
 	}
 
     Light getLightState(const std::string& id) {
-        auto res = cli.Get("/lights/" + id);
+        auto res = makeAPIRequest("/lights/" + id);
         if (!res) {
-            std::cerr << "Request failed or connection error.\n";
+            std::cerr << "Lost connection to the server.\n";
+            isConnectedNow = false;
+            wasConnectedLastTime = isConnectedNow;
             return Light{};
         }
+		isConnectedNow = true;
+        if (!wasConnectedLastTime && isConnectedNow) {
+			std::cout << "Reconnected to the server.\n";
+		}
+		wasConnectedLastTime = isConnectedNow;
         if (res->status != 200) {
             std::cerr << "Failed to get light state. HTTP status: " << res->status << std::endl;
             return Light{};
@@ -118,14 +127,34 @@ public:
 		}
     }
 
+    httplib::Result makeAPIRequest(const std::string& endpoint) {
+        for (int attempt = 0; attempt < 3; ++attempt) {
+            auto res = cli.Get(endpoint);
+            if (res) {
+                return res;
+            } else {
+                std::cerr << "Attempt " << (attempt + 1) << " failed. Retrying...\n";
+                std::this_thread::sleep_for(std::chrono::milliseconds(200)); // Wait before retrying
+            }
+		}
+        return {};
+	}
+
     void getAllLights() {
         std::map<std::string, Light> tempHolder;
-        auto res = cli.Get("/lights");
+        auto res = makeAPIRequest("/lights");
 
         if (!res) {
-            std::cerr << "Request failed or connection error.\n";
+            std::cerr << "Lost connection to the server.\n";
+            isConnectedNow = false;
+            wasConnectedLastTime = isConnectedNow;
             return;
         }
+        isConnectedNow = true;
+        if (!wasConnectedLastTime && isConnectedNow) {
+            std::cout << "Reconnected to the server.\n";
+		}
+        wasConnectedLastTime = isConnectedNow;
 
         if (res->status != 200) {
             std::cerr << "Failed to get lights status. HTTP status: " << res->status << std::endl;
